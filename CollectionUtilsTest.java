@@ -15,7 +15,7 @@ public class CollectionUtilsTest {
 		List<Integer> expected = new ArrayList<Integer>();
 		expected.add(2);
 		
-		List<Integer> newList = CollectionUtils.filter(list, integerFilter);
+		List<Integer> newList = CollectionUtils.<Integer>filter(list, integerFilter);
 		assertEquals(newList.get(0), expected.get(0));
 	}
 
@@ -29,7 +29,7 @@ public class CollectionUtilsTest {
 		List<Float> expected = new ArrayList<Float>();
 		expected.add(2.2f);
 		
-		List<Float> newList = CollectionUtils.filter(list, floatFilter);
+		List<Float> newList = CollectionUtils.<Float>filter(list, floatFilter);
 		assertEquals(newList.get(0), expected.get(0));
 	}
 
@@ -44,7 +44,7 @@ public class CollectionUtilsTest {
 		expected.add(2);
 		expected.add(3);
 		
-		List<Integer> newList = CollectionUtils.map(list, integerMap);
+		List<Integer> newList = CollectionUtils.<Integer, Integer>map(list, integerMap);
 		assertEquals(newList.get(0), expected.get(0));
 		assertEquals(newList.get(1), expected.get(1));
 	}
@@ -60,7 +60,7 @@ public class CollectionUtilsTest {
 		expected.add(2.3f);
 		expected.add(3.3f);
 		
-		List<Float> newList = CollectionUtils.map(list, floatMap);
+		List<Float> newList = CollectionUtils.<Float, Float>map(list, floatMap);
 		assertEquals(newList.get(0), expected.get(0));
 		assertEquals(newList.get(1), expected.get(1));
 	}
@@ -76,7 +76,7 @@ public class CollectionUtilsTest {
 		expected.add('a');
 		expected.add('b');
 		
-		List<Character> newList = CollectionUtils.map(list, charMap);
+		List<Character> newList = CollectionUtils.<Character, Character>map(list, charMap);
 		assertEquals(newList.get(0), expected.get(0));
 		assertEquals(newList.get(1), expected.get(1));
 	}
@@ -92,8 +92,37 @@ public class CollectionUtilsTest {
 		expected.add("1");
 		expected.add("2");
 		
-		List<String> newList = CollectionUtils.map(list, intMap);
+		List<String> newList = CollectionUtils.<Integer, String>map(list, intMap);
 		assertEquals(newList.get(0), expected.get(0));
 		assertEquals(newList.get(1), expected.get(1));
+	}
+
+	@Test
+	public void reduce_should_return_3_for_1_and_2 () {
+		ListReducer<Integer, Integer> intReduce = new IntListReducer();
+		List<Integer> list = new ArrayList<Integer>();
+		Integer initial = new Integer(0);
+		Integer expected = new Integer(3);
+
+		list.add(1);
+		list.add(2);
+		
+		Integer newList = CollectionUtils.<Integer, Integer>reduce(list, intReduce, initial);
+		assertEquals(newList.intValue(), expected.intValue());
+	}
+
+	@Test
+	public void reduce_returns_the_sum_of_all_numbers (){
+		ListReducer<Integer,Integer> listReducer = new SumReducer();
+		List<Integer> numbers = new ArrayList<Integer>();
+		Integer initial = new Integer(0);
+		Integer expected = new Integer(6);
+
+		numbers.add(1);
+		numbers.add(2);
+		numbers.add(3);
+
+		Integer sum = CollectionUtils.<Integer,Integer>reduce(numbers,listReducer,initial);
+		assertEquals(expected,sum);
 	}
 }

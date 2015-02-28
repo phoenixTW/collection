@@ -25,4 +25,14 @@ class CollectionUtils {
 
 		return newList;
 	}
+
+	public static<E,K> K reduce (List<E> list, ListReducer<E,K> callback, K initial) {
+		int counter = -1;
+
+		for (E value : list) {
+			initial = callback.reduceCallback(initial, value, ++counter, list);
+		}
+
+		return initial;
+	} 
 }
