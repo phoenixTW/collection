@@ -2,8 +2,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 class CollectionUtils {
-	public static List<Integer> filter (List<Integer> list, ListFilter callback) {
-		List<Integer> newList = new ArrayList<Integer>();
+	public static<E> List<E> filter (List<E> list, ListFilter callback) {
+		List<E> newList = new ArrayList<E>();
 		
 		for (int counter = 0; counter < list.size(); counter++) {
 			if(callback.filterCallback(list.get(counter), counter, list)){
@@ -14,12 +14,12 @@ class CollectionUtils {
 		return newList;
 	}
 
-	public static List<Integer> map (List<Integer> list, ListMap callback) {
-		List<Integer> newList = new ArrayList<Integer>();
+	public static<E> List<E> map (List<E> list, ListMap<E> callback) {
+		List<E> newList = new ArrayList<E>();
 		int counter = -1;
 
-		for (Integer value : list) {
-			Integer result = (Integer)callback.mapCallback(value, ++counter, list);
+		for (E value : list) {
+			E result = callback.mapCallback(value, ++counter, list);
 			newList.add(result);
 		}
 
