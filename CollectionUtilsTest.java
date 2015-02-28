@@ -125,4 +125,18 @@ public class CollectionUtilsTest {
 		Integer sum = CollectionUtils.<Integer,Integer>reduce(numbers,listReducer,initial);
 		assertEquals(expected,sum);
 	}
+
+	@Test
+	public void reduce_should_return_3_3_for_1_1_and_2_2 () {
+		ListReducer<Float, Float> floatReduce = new FloatListReducer();
+		List<Float> list = new ArrayList<Float>();
+		Float initial = new Float(0.0f);
+		Float expected = new Float(3.3f);
+
+		list.add(1.1f);
+		list.add(2.2f);
+		
+		Float newList = CollectionUtils.<Float, Float>reduce(list, floatReduce, initial);
+		assertEquals(newList.intValue(), expected.intValue());
+	}
 }

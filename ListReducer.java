@@ -12,6 +12,13 @@ class IntListReducer implements ListReducer<Integer, Integer> {
 	}	
 }
 
+class FloatListReducer implements ListReducer<Float, Float> {
+	
+	public Float reduceCallback (Float previous, Float current, int index, List<Float> list){
+		return previous.floatValue() + current.floatValue();
+	}	
+}
+
 class SumReducer implements ListReducer<Integer,Integer> {
 	public Integer reduceCallback (Integer pv, Integer cv , int index, List<Integer> list) {
 		return pv.intValue()+cv.intValue();
