@@ -80,4 +80,20 @@ public class CollectionUtilsTest {
 		assertEquals(newList.get(0), expected.get(0));
 		assertEquals(newList.get(1), expected.get(1));
 	}
+
+	@Test
+	public void map_should_return_string_representation_of_numbers () {
+		ListMap<Integer, String> intMap = new IntegerMapTwo();
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(1);
+		list.add(2);
+		
+		List<String> expected = new ArrayList<String>();
+		expected.add("1");
+		expected.add("2");
+		
+		List<String> newList = CollectionUtils.map(list, intMap);
+		assertEquals(newList.get(0), expected.get(0));
+		assertEquals(newList.get(1), expected.get(1));
+	}
 }
