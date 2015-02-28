@@ -14,19 +14,7 @@ class CollectionUtils {
 		return newList;
 	}
 
-	// public static<E> List<E> map (List<E> list, ListMap<E> callback) {
-	// 	List<E> newList = new ArrayList<E>();
-	// 	int counter = -1;
-
-	// 	for (E value : list) {
-	// 		E result = callback.mapCallback(value, ++counter, list);
-	// 		newList.add(result);
-	// 	}
-
-	// 	return newList;
-	// }
-
-		public static<E,K> List<K> map (List<E> list, ListMap<E,K> callback) {
+	public static<E,K> List<K> map (List<E> list, ListMap<E,K> callback) {
 		List<K> newList = new ArrayList<K>();
 		int counter = -1;
 
